@@ -2,8 +2,9 @@ import { useConversation } from "@elevenlabs/react";
 import { useCallback, useRef, useEffect } from "react";
 import { useAppStore } from "../store/appStore";
 
-const AGENT_ID = "agent_2401kc5n6szxf4cr9dfz1j7mfydt";
-const SILENCE_TIMEOUT_MS = 5000; // 10 seconds
+const AGENT_ID = import.meta.env.VITE_ELEVENLABS_AGENT_ID;
+const SILENCE_TIMEOUT_MS =
+  Number(import.meta.env.VITE_SILENCE_TIMEOUT_MS) || 10000;
 
 const safeConversationsStarters = [
   "What did your father do when you were little?",
@@ -73,7 +74,6 @@ export function useElevenLabsAgent() {
         isSleepingRef.current = true;
         setSleeping(true);
         clearSilenceTimer();
-        await new Promise((resolve) => setTimeout(resolve, 60000));
         setSleeping(false);
         isSleepingRef.current = false;
         console.log("Sleep tool completed successfully");

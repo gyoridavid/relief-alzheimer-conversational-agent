@@ -1,0 +1,134 @@
+{
+  "name": "Ingest: upload image",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ab082ad4-b2fb-41ec-b392-ae2b9a79844e",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -512,
+        0
+      ],
+      "id": "0c0ab517-8a77-490d-90a5-604025d488fa",
+      "name": "Webhook",
+      "webhookId": "ab082ad4-b2fb-41ec-b392-ae2b9a79844e"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "help me to describe in detail, what's on this image",
+        "messages": {
+          "messageValues": [
+            {
+              "type": "HumanMessagePromptTemplate",
+              "messageType": "imageBinary",
+              "binaryImageDataKey": "image"
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        -208,
+        0
+      ],
+      "id": "f4c555d0-4d45-43f9-85ae-e3de1e05ae62",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-5-mini"
+        },
+        "builtInTools": {},
+        "options": {
+          "reasoningEffort": "low"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -272,
+        224
+      ],
+      "id": "330831bf-c108-42f9-9e77-97e909ad5097",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "AKUetX4nK5LKwRFZ",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        176,
+        0
+      ],
+      "id": "c017c398-63d5-4ef4-b934-80983662d75d",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "4e352b25-6223-4445-ac7f-a65f68325c97",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ed42440a788fda805d984780865d937fc9fcbc97d9a3d84866403b9f796e3b64"
+  },
+  "id": "7l85o49ar0RQYujI",
+  "tags": []
+}

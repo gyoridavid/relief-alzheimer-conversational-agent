@@ -81,8 +81,8 @@ function App() {
         // Start everything
         // Start webcam service
         const service = createWebcamService({
-          url: "https://eleven-ww-hck-bp.app.n8n.cloud/webhook/ab082ad4-b2fb-41ec-b392-ae2b9a79844e",
-          intervalMs: 20000, // 60 seconds
+          url: import.meta.env.VITE_WEBHOOK_URL,
+          intervalMs: Number(import.meta.env.VITE_WEBCAM_INTERVAL_MS) || 5000,
           uploadFormat: "formdata",
           imageField: "image",
           onSuccess: async (_result, response) => {
