@@ -26,11 +26,22 @@ As assistive technology continues to evolve—and with [emerging research](https
   - Tool Name: `sleep`
   - Description: `Puts the agent to sleep mode, where it will not respond until the user speaks again. Use this tool when the user has been silent for a while.`
   - No parameters
+- In the agent settings, under the `Conversational behaviour` set the `Eagerness` to `Patient` and the `Take turn after silence` to `-1`.
 - Copy the Agent ID
 
 ✅ Make a copy of the `.env.example` file and rename it to `.env`, then fill in the required environment variables
 
 ✅ Lastly, run the project with `pnpm dev`
+
+<table>
+  <tbody>
+    <tr>
+      <td><img src="https://github.com/user-attachments/assets/97245358-52e6-40eb-a308-ed24a35cebcc" /></td>
+      <td><img src="https://github.com/user-attachments/assets/4bcbe4d3-055b-429a-8bfa-013d861dd079" /></td>
+      <td><img src="https://github.com/user-attachments/assets/cb1a5c53-cc96-4ad8-957b-1402d5c769db" /></td>
+    </tr>
+  </tbody>
+</table>
 
 ## Environment Variables
 
